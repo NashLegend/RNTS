@@ -21,26 +21,26 @@ export default class ScrollPanel extends Component {
     render() {
         var f = new Profile()
         return (
-                <ScrollView style={{
+            <ScrollView style={{
                     flex: 1,
                     alignSelf: 'stretch'
                 }}>
-                    <Profile avatar={{
+                <Profile avatar={{
                         uri: 'https://avatars1.githubusercontent.com/u/5809592'
                     }} name='Peter' desc="Nice"/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                    <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
-                    <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
-                </ScrollView>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+            </ScrollView>
         );
     }
 }
