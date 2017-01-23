@@ -8,6 +8,7 @@ import React, {Component} from 'react';
 import {AppRegistry, StyleSheet, Navigator, View, BackAndroid} from 'react-native';
 import TypeView from './Profile'
 import ListPanel from './ListPanel'
+import ScrollPanel from './ScrollPanel'
 
 var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -24,12 +25,19 @@ export default class RNTS extends Component {
         _navigator = navigationOperations;
         if (route.name === 'first') {
             return (
-                <TypeView name="8888" desc="007" avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809592'}}
+                <TypeView name="8888"
+                          desc="007"
+                          avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809592'}}
                           navigator={_navigator}/>
             );
         } else if (route.name === 'second') {
-            return <ListPanel name="second" desc="007" avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809523'}}
-                             navigator={_navigator}/>
+            return <ListPanel name="second" desc="007"
+                              avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809523'}}
+                              navigator={_navigator}/>
+        } else if (route.name === 'third') {
+            return <ScrollPanel name="second" desc="007"
+                                avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809523'}}
+                                navigator={_navigator}/>
         }
     }
 
@@ -37,7 +45,7 @@ export default class RNTS extends Component {
         try {
             let response = await fetch('http://facebook.github.io/react-native/movies.json');
             let responseJson = await response.json();
-        }catch (err){
+        } catch (err) {
 
         }
     }

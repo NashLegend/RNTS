@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 import Profile from './Profile'
-import Item from './component/common/Item'
+import Item from './Item'
 
 export default class ScrollPanel extends Component {
     render() {
