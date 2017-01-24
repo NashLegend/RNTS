@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-///<reference path="node_modules/@types/react-native/index.d.ts"/>
 const React = require("react");
 const react_native_1 = require("react-native");
 const Item_1 = require("./Item");

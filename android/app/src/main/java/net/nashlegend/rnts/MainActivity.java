@@ -1,4 +1,4 @@
-package com.rnts;
+package net.nashlegend.rnts;
 
 import com.facebook.react.ReactActivity;
 
