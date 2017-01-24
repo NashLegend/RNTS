@@ -1,6 +1,7 @@
 package net.nashlegend.rnts;
 
 import android.app.Application;
+
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -8,60 +9,62 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import net.nashlegend.rnts.BuildConfig;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-	private static ReactContext mReactContext;
+    private static ReactContext mReactContext;
+    private static ReactNativeHost sReactNativeHost;
+    private final ReactInstanceManager.ReactInstanceEventListener mReactInstanceEventListener =
+            new ReactInstanceManager.ReactInstanceEventListener() {
+                @Override
+                public void onReactContextInitialized(ReactContext context) {
+                    mReactContext = context;
+                }
+            };
+    private ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
 
-	public static ReactContext getReactContext() {
-		return mReactContext;
-	}
+        @Override
+        protected boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
 
-	private static ReactNativeHost sReactNativeHost;
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(new MainReactPackage());
+        }
+    };
 
-	public static ReactNativeHost getReactHost() {
-		return sReactNativeHost;
-	}
+    public static ReactContext getReactContext() {
+        return mReactContext;
+    }
 
-	private ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    public static ReactNativeHost getReactHost() {
+        return sReactNativeHost;
+    }
 
-		@Override protected boolean getUseDeveloperSupport() {
-			return BuildConfig.DEBUG;
-		}
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
+    }
 
-		@Override protected List<ReactPackage> getPackages() {
-			return Arrays.<ReactPackage>asList(new MainReactPackage());
-		}
-	};
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this, /* native exopackage */ false);
+        sReactNativeHost = mReactNativeHost;
+        registerReactInstanceEventListener();
+    }
 
-	@Override public ReactNativeHost getReactNativeHost() {
-		return mReactNativeHost;
-	}
+    private void registerReactInstanceEventListener() {
+        mReactNativeHost.getReactInstanceManager()
+                .addReactInstanceEventListener(mReactInstanceEventListener);
+    }
 
-	@Override public void onCreate() {
-		super.onCreate();
-		SoLoader.init(this, /* native exopackage */ false);
-		sReactNativeHost = mReactNativeHost;
-		registerReactInstanceEventListener();
-	}
-
-	private void registerReactInstanceEventListener() {
-		mReactNativeHost.getReactInstanceManager()
-			.addReactInstanceEventListener(mReactInstanceEventListener);
-	}
-
-	private void unRegisterReactInstanceEventListener() {
-		mReactNativeHost.getReactInstanceManager()
-			.removeReactInstanceEventListener(mReactInstanceEventListener);
-	}
-
-	private final ReactInstanceManager.ReactInstanceEventListener mReactInstanceEventListener =
-		new ReactInstanceManager.ReactInstanceEventListener() {
-			@Override public void onReactContextInitialized(ReactContext context) {
-				mReactContext = context;
-			}
-		};
+    private void unRegisterReactInstanceEventListener() {
+        mReactNativeHost.getReactInstanceManager()
+                .removeReactInstanceEventListener(mReactInstanceEventListener);
+    }
 }

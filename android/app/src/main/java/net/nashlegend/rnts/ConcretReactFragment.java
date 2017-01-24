@@ -8,7 +8,8 @@ import net.nashlegend.rnts.partial.ReactFragment;
  */
 
 public class ConcretReactFragment extends ReactFragment {
-	@Override protected String getMainPageName() {
-		return "RNTS";
-	}
+    @Override
+    protected String getMainPageName() {
+        return "RNTS";
+    }
 }
