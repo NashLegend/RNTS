@@ -42,11 +42,16 @@ public abstract class ReactFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
+    public void onDetach() {
         if (mReactRootView != null) {
             mReactRootView.unmountReactApplication();
             mReactRootView = null;
         }
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
     }
 
