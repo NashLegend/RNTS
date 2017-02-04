@@ -59,7 +59,7 @@ public class ReactPartialActivity extends AppCompatActivity implements DefaultHa
     public void callJs() {
         getReactInstanceManager().getCurrentReactContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("NativeTalk", "StringParam");
+                .emit("NativeTalk", "TimeInMills "+System.currentTimeMillis());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
