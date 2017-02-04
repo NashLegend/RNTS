@@ -1,53 +1,58 @@
 ///<reference path="node_modules/@types/react-native/index.d.ts"/>
 import * as React from 'react'
-import { StyleSheet, Text, Image, View, Navigator, TouchableOpacity, TouchableNativeFeedback, Button } from 'react-native'
+import {StyleSheet, Text, Image, View, Navigator, TouchableOpacity, TouchableNativeFeedback, Button} from 'react-native'
+import * as UserActions from './actions/users'
+import {Store} from "redux";
 
 interface Props {
     avatar: string
     name: string
     desc: string
     navigator: Navigator
+    store: Store<any>
+    user: any
 }
 
 interface State {
-    hasUser: boolean
+    isLoggedIn: boolean
 }
 
 export default class TypeView extends React.Component<Props, State> {
 
     constructor(props: Props) {
-        super();
-        this.state = { hasUser: true };
+        super(props);
     }
 
     onPressAvatar() {
         if (this.props.name == 'second') {
             this.props.navigator.pop()
         } else {
-            this.props.navigator.push({ name: 'second' })
+            this.props.navigator.push({name: 'second'})
         }
     }
 
     onButtonClicked() {
-        // todo login or logout
-    }
-
-    componentDidMount(): void {
-
+        if (this.props.user.isLoggedIn) {
+            this.props.store.dispatch(UserActions.logOut())
+        } else {
+            this.props.store.dispatch(UserActions.logIn())
+        }
     }
 
     render() {
+        let user = this.props.user;
         return (
             <View style={styles.container}>
                 <TouchableOpacity onPress={this.onPressAvatar.bind(this)}>
-                    <Image style={styles.avatar} source={this.props.avatar} />
+                    <Image style={styles.avatar} source={{uri:user.isLoggedIn?user.user.avatar:this.props.avatar}}/>
                 </TouchableOpacity>
                 <View style={styles.subContainer}>
                     <View style={{ flexDirection: 'row', flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
-                        <Text style={styles.names}>{this.state.hasUser ? this.props.name : 'nonymous'}</Text>
-                        <Button onPress={this.onButtonClicked.bind(this)} title="Click me ! " />
+                        <Text style={styles.names}>{user.isLoggedIn ? user.user.name : 'visitor'}</Text>
+                        <Button onPress={this.onButtonClicked.bind(this)} title="Toggle Log"/>
                     </View>
-                    <Text style={styles.instructions}>{this.state.hasUser ? this.props.desc : 'none'}</Text>
+                    <Text
+                        style={styles.instructions}>{user.isLoggedIn ? user.user.age : 'just a visitor without age'}</Text>
                 </View>
             </View>
         )

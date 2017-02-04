@@ -12,7 +12,6 @@ const logger = store => next => action => {
     else console.log('dispatching', action);
     let result = next(action);
     console.log('next state', store.getState());
-
     return result;
 };
 
@@ -28,7 +27,6 @@ export default function configureStore(onComplete: () => void) {
     let opt = {
         storage: AsyncStorage,
         transform: [],
-        //whitelist: ['userStore'],
     };
     persistStore(store, opt, onComplete);
     return store;

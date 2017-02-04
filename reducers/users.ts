@@ -14,12 +14,14 @@ export default function user(state = initialState, action) {
 
     switch (action.type) {
         case TYPES.LOGGING:
+            console.log("LOGGING");
             return {
                 ...state,
                 status: 'doing'
             };
 
         case TYPES.LOGGED_IN:
+            console.log("LOGGED_IN");
             return {
                 ...state,
                 isLoggedIn: true,
@@ -28,6 +30,7 @@ export default function user(state = initialState, action) {
             };
 
         case TYPES.LOGGED_OUT:
+            console.log("LOGGED_OUT");
             return {
                 ...state,
                 isLoggedIn: false,
@@ -35,6 +38,7 @@ export default function user(state = initialState, action) {
                 status: null
             };
         case TYPES.LOGGED_ERROR:
+            console.log("LOGGED_ERROR");
             return {
                 ...state,
                 isLoggedIn: false,

@@ -13,7 +13,7 @@ interface Props {
 }
 
 interface State {
-    hasUser: boolean
+    isLoggedIn: boolean
 }
 
 export default class Profile extends React.Component<Props, State> {

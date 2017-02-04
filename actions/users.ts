@@ -8,12 +8,12 @@ import * as TYPES from './types';
 
 let defaultUser = {
     'name': 'NashLegend',
-    'age': '24',
-    'avatar': 'https://avatars1.githubusercontent.com/u/1439939?v=3&s=460'
+    'age': '28',
+    'avatar': 'https://avatars1.githubusercontent.com/u/5809592'
 };
 
 // login
-export function logIn(opt) {
+export function logIn() {
     return (dispatch) => {
         dispatch({'type': TYPES.LOGGING});
         let inner_get = fetch('http://www.baidu.com')
