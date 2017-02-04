@@ -28,6 +28,10 @@ export default class TypeView extends React.Component<Props, State> {
         }
     }
 
+    onButtonClicked() {
+        // todo login or logout
+    }
+
     componentDidMount(): void {
 
     }
@@ -41,7 +45,7 @@ export default class TypeView extends React.Component<Props, State> {
                 <View style={styles.subContainer}>
                     <View style={{ flexDirection: 'row', flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
                         <Text style={styles.names}>{this.state.hasUser ? this.props.name : 'nonymous'}</Text>
-                        <Button onPress={this.onPressAvatar.bind(this)} title="Click me ! " />
+                        <Button onPress={this.onButtonClicked.bind(this)} title="Click me ! " />
                     </View>
                     <Text style={styles.instructions}>{this.state.hasUser ? this.props.desc : 'none'}</Text>
                 </View>

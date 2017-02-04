@@ -15,6 +15,9 @@ class TypeView extends React.Component {
             this.props.navigator.push({ name: 'second' });
         }
     }
+    onButtonClicked() {
+        // todo login or logout
+    }
     componentDidMount() {
     }
     render() {
@@ -24,7 +27,7 @@ class TypeView extends React.Component {
             React.createElement(react_native_1.View, { style: styles.subContainer },
                 React.createElement(react_native_1.View, { style: { flexDirection: 'row', flex: 1, alignSelf: 'stretch', alignItems: 'center' } },
                     React.createElement(react_native_1.Text, { style: styles.names }, this.state.hasUser ? this.props.name : 'nonymous'),
-                    React.createElement(react_native_1.Button, { onPress: this.onPressAvatar.bind(this), title: "Click me ! " })),
+                    React.createElement(react_native_1.Button, { onPress: this.onButtonClicked.bind(this), title: "Click me ! " })),
                 React.createElement(react_native_1.Text, { style: styles.instructions }, this.state.hasUser ? this.props.desc : 'none'))));
     }
 }

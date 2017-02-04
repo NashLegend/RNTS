@@ -9,6 +9,10 @@ import {AppRegistry, StyleSheet, Navigator, View, BackAndroid} from 'react-nativ
 import TypeView from './Profile'
 import ListPanel from './ListPanel'
 import ScrollPanel from './ScrollPanel'
+import {Provider} from 'react-redux'
+import configureStore from './store/users'
+
+let store = configureStore();
 
 var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -20,6 +24,14 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
 });
 
 export default class RNTS extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            isLoading: true,
+            store: configureStore(() => this.setState({isLoading:false}))
+        }
+    }
 
     routeMapper(route, navigationOperations, onComponentRef) {
         _navigator = navigationOperations;
@@ -41,19 +53,12 @@ export default class RNTS extends Component {
         }
     }
 
-    async startRequest() {
-        try {
-            let response = await fetch('http://facebook.github.io/react-native/movies.json');
-            let responseJson = await response.json();
-        } catch (err) {
-
-        }
-    }
-
     render() {
         return (
-            <Navigator style={styles.container} initialRoute={{name: 'first', title: 'First', index: 0}}
-                       renderScene={this.routeMapper}/>
+            <Provider store={store}>
+                <Navigator style={styles.container} initialRoute={{name: 'first', title: 'First', index: 0}}
+                           renderScene={this.routeMapper}/>
+            </Provider>
         );
     }
 }
