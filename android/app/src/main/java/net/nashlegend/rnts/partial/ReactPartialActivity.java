@@ -2,19 +2,32 @@ package net.nashlegend.rnts.partial;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.modules.core.PermissionAwareActivity;
 import com.facebook.react.modules.core.PermissionListener;
 
-public class ReactPartialActivity extends AppCompatActivity
-        implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
+import net.nashlegend.rnts.R;
+import net.nashlegend.rnts.events.Talk;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+public class ReactPartialActivity extends AppCompatActivity implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 
     private final ReactPartialActivityDelegate mDelegate;
+    Button button;
+    TextView textView;
 
     public ReactPartialActivity() {
         mDelegate = createReactActivityDelegate();
@@ -29,9 +42,29 @@ public class ReactPartialActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
         setContentView(net.nashlegend.rnts.R.layout.activity_man);
         mDelegate.onCreate(savedInstanceState);
+        button = (Button) findViewById(R.id.inter);
+        textView = (TextView) findViewById(R.id.infos);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callJs();
+            }
+        });
+    }
+
+    public void callJs() {
+        getReactInstanceManager().getCurrentReactContext()
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("NativeTalk", "StringParam");
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receiveTalk(Talk talk) {
+        textView.setText("I had told you " + talk.times + " times that " + talk.message);
     }
 
     @Override
@@ -49,6 +82,7 @@ public class ReactPartialActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         mDelegate.onDestroy();
     }
 
@@ -88,8 +122,7 @@ public class ReactPartialActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mDelegate.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -100,4 +133,6 @@ public class ReactPartialActivity extends AppCompatActivity
     protected final ReactInstanceManager getReactInstanceManager() {
         return mDelegate.getReactInstanceManager();
     }
+
+
 }

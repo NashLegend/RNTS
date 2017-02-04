@@ -33,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(new MainReactPackage());
+            List<ReactPackage> packages = Arrays.asList(new MainReactPackage(), new InfoReactPackage());
+            return packages;
         }
     };
 
