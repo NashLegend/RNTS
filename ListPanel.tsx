@@ -1,13 +1,10 @@
 ///<reference path="node_modules/@types/react-native/index.d.ts"/>
 import * as React from 'react'
 import {
-    StyleSheet,
-    Text,
-    View,
     ListView,
     ListViewDataSource,
+    Navigator,
     DataSourceAssetCallback,
-    Image
 } from 'react-native';
 
 import Item from './Item'
@@ -16,6 +13,7 @@ interface Props {
     icon: string
     name: string
     desc: string
+    navigator: Navigator
 }
 
 interface State {
@@ -62,10 +60,12 @@ export default class ListPanel extends React.Component<Props,State> implements D
     }
 
     renderRow(rowData: any, sectionID: string | number, rowID: string | number, highlightRow?: boolean) {
-        return <Item name={rowData.title} desc="dddd" icon={require('./assets/img/ic_follow_more.png')}/>
+        return <Item name={rowData.title} desc="dddd" navigator={this.props.navigator}
+                     icon={require('./assets/img/ic_follow_more.png')}/>
     }
 
     render(): JSX.Element {
+        console.log("render List");
         return <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>
     }
 }

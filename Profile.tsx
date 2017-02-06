@@ -45,11 +45,7 @@ export default class TypeView extends React.Component<Props, State> {
     }
 
     onPressAvatar() {
-        if (this.props.name == 'second') {
-            this.props.navigator.pop()
-        } else {
-            this.props.navigator.push({name: 'second'})
-        }
+        this.props.navigator.push({name: 'second'})
     }
 
     onButtonClicked() {
@@ -64,7 +60,7 @@ export default class TypeView extends React.Component<Props, State> {
         console.log(this);
         console.log(this.state);
         this.setState({
-            nativeCall:e
+            nativeCall: e
         })
     }
 
@@ -86,7 +82,7 @@ export default class TypeView extends React.Component<Props, State> {
 
     render() {
         let user = this.props.user;
-        console.log("render");
+        console.log("render profile " + user);
         let info: string = "Empty";
         if (this.state != null && this.state.nativeCall != null) {
             info = this.state.nativeCall

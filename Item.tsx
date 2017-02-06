@@ -3,13 +3,16 @@ import {
     StyleSheet,
     Text,
     View,
-    Image
+    Image,
+    Navigator,
+    TouchableHighlight
 } from 'react-native';
 
 interface Props {
     icon: string
     name: string
     desc: string
+    navigator: Navigator
 }
 
 interface State {
@@ -22,14 +25,27 @@ export default class Profile extends React.Component<Props, State> {
         super(props)
     }
 
+    onClick() {
+        if (this.props.navigator != null) {
+            if (this.props.name == '我的关注') {
+                this.props.navigator.push({name: 'first'})
+            } else {
+                this.props.navigator.push({name: 'third'})
+            }
+        }
+    }
+
     render() {
-        return <View style={styles.container}>
-            <Image style={styles.icon} source={this.props.icon}/>
-            <View style={styles.subContainer}>
-                <Text style={styles.names}>{this.props.name}</Text>
-                <View style={styles.divider}/>
+        console.log("render Item")
+        return <TouchableHighlight onPress={this.onClick.bind(this)}>
+            <View style={styles.container}>
+                <Image style={styles.icon} source={this.props.icon}/>
+                <View style={styles.subContainer}>
+                    <Text style={styles.names}>{this.props.name}</Text>
+                    <View style={styles.divider}/>
+                </View>
             </View>
-        </View>
+        </TouchableHighlight>
     }
 }
 
