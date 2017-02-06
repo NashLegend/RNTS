@@ -23,7 +23,6 @@ export default class Profile extends React.Component<Props, State> {
 
     constructor(props) {
         super(props)
-        console.log("Reused?")
     }
 
     onClick() {

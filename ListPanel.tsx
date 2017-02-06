@@ -71,6 +71,6 @@ export default class ListPanel extends React.Component<Props,State> implements D
         console.log("render List");
         //在Android上加上下面这行会使用原生的RecyclerViewBackedScrollView，复用View，如果不加的话，只会使用ScrollView
         // renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
-        return <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>
+        return (<ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>)
     }
 }
