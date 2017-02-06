@@ -23,6 +23,7 @@ export default class Profile extends React.Component<Props, State> {
 
     constructor(props) {
         super(props)
+        console.log("Reused?")
     }
 
     onClick() {
@@ -36,7 +37,6 @@ export default class Profile extends React.Component<Props, State> {
     }
 
     render() {
-        console.log("render Item")
         return <TouchableHighlight onPress={this.onClick.bind(this)}>
             <View style={styles.container}>
                 <Image style={styles.icon} source={this.props.icon}/>
@@ -52,7 +52,7 @@ export default class Profile extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        height: 64,
+        height: 96,
         justifyContent: 'flex-end',
         alignItems: 'stretch',
         backgroundColor: '#dbdbdb'

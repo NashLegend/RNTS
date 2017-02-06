@@ -4,10 +4,12 @@ import {
     ListView,
     ListViewDataSource,
     Navigator,
+    RecyclerViewBackedScrollView,
     DataSourceAssetCallback,
 } from 'react-native';
 
 import Item from './Item'
+import ReactElement = React.ReactElement;
 
 interface Props {
     icon: string
@@ -49,6 +51,7 @@ export default class ListPanel extends React.Component<Props,State> implements D
             let response: Response = await fetch('http://facebook.github.io/react-native/movies.json');
             let responseJson: any = await response.json();
             let arr: Array<any> = responseJson.movies;
+            arr = arr.concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr);
             this.setState({
                 dataSource: this.source.cloneWithRows(arr)
             })
@@ -66,6 +69,8 @@ export default class ListPanel extends React.Component<Props,State> implements D
 
     render(): JSX.Element {
         console.log("render List");
+        //在Android上加上下面这行会使用原生的RecyclerViewBackedScrollView，复用View，如果不加的话，只会使用ScrollView
+        // renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
         return <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>
     }
 }

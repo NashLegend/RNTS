@@ -22,7 +22,7 @@ export default class ScrollPanel extends Component {
         console.log("render ScrollPanel");
         var f = new Profile()
         return (
-            <ScrollView style={{
+            <ScrollView removeClippedSubviews={true} style={{
                     flex: 1,
                     alignSelf: 'stretch'
                 }}>
@@ -33,6 +33,16 @@ export default class ScrollPanel extends Component {
                 <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
                 <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
                 <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
+                <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
+                <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
                 <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
                 <Item name="我的关注" icon={require('./assets/img/ic_follow_more.png')}/>
                 <Item name="我的收藏" icon={require('./assets/img/ic_forum_grey_24dp.png')}/>
