@@ -57,8 +57,6 @@ export default class TypeView extends React.Component<Props, State> {
     }
 
     getNativeCalled(e) {
-        console.log(this);
-        console.log(this.state);
         this.setState({
             nativeCall: e
         })
@@ -82,10 +80,9 @@ export default class TypeView extends React.Component<Props, State> {
 
     render() {
         let user = this.props.user;
-        console.log("render profile " + user);
         let info: string = "Empty";
         if (this.state != null && this.state.nativeCall != null) {
-            info = this.state.nativeCall
+            info = this.state.nativeCall + " TimeInMills " + Date.now()
         }
         console.log(info);
         return (

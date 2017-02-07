@@ -1,6 +1,8 @@
 ///<reference path="node_modules/@types/react-native/index.d.ts"/>
 import * as React from 'react'
 import {
+    StyleSheet,
+    View,
     ListView,
     ListViewDataSource,
     Navigator,
@@ -68,9 +70,16 @@ export default class ListPanel extends React.Component<Props,State> implements D
     }
 
     render(): JSX.Element {
-        console.log("render List");
         //在Android上加上下面这行会使用原生的RecyclerViewBackedScrollView，复用View，如果不加的话，只会使用ScrollView
-        // renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
-        return (<ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}/>)
+        //renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
+        return (
+            <View style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column'}}>
+                <ListView style={{alignSelf:'stretch'}}
+                          renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
+                          initialListSize={1}
+                          dataSource={this.state.dataSource}
+                          renderRow={this.renderRow.bind(this)}/>
+            </View>
+        )
     }
 }
