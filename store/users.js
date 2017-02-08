@@ -4,21 +4,13 @@
  */
 const redux_1 = require("redux");
 const redux_thunk_1 = require("redux-thunk");
-const redux_persist_1 = require("redux-persist");
-const react_native_1 = require("react-native");
 const reducers_1 = require("../reducers");
 let middlewares = [
     redux_thunk_1.default
 ];
 let createAppStore = redux_1.applyMiddleware(...middlewares)(redux_1.createStore);
-function configureStore(onComplete) {
-    const store = redux_persist_1.autoRehydrate()(createAppStore)(reducers_1.default);
-    let opt = {
-        storage: react_native_1.AsyncStorage,
-        transform: [],
-    };
-    redux_persist_1.persistStore(store, opt, onComplete);
-    return store;
+function configureStore() {
+    return createAppStore(reducers_1.default);
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = configureStore;

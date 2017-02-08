@@ -9,6 +9,8 @@ import ListPanel from './ListPanel'
 import ScrollPanel from './ScrollPanel'
 import {Provider} from 'react-redux'
 import configureStore from './store/users'
+import ProfileView from './module/profile/view/ProfileView'
+import People from './module/profile/model/People'
 
 let store = configureStore();
 
@@ -21,6 +23,8 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
     return false;
 });
 
+let people;
+
 export default class RNTS extends Component {
 
     constructor() {
@@ -28,18 +32,26 @@ export default class RNTS extends Component {
         this.state = {
             isLoading: true,
             store: configureStore(() => this.setState({isLoading: false}))
-        }
+        };
+        people = new People();
+        people.following_topic_count = 1;
+        people.following_count = 1;
+        people.follower_count = 1;
+        people.voteup_count = 1;
+        people.thanked_count = 1;
+        people.avatar_url = 'https://avatars1.githubusercontent.com/u/5809592';
+        people.headline = '我本将心向明月，奈何明月照沟渠';
     }
 
     routeMapper(route, navigationOperations, onComponentRef) {
         _navigator = navigationOperations;
         if (route.name === 'first') {
             return (
-                <Profile name="NoFace"
-                         desc="007"
-                         store={store}
-                         avatar='https://avatars2.githubusercontent.com/u/5145108'
-                         navigator={_navigator}/>
+                <ProfileView name="NoFace"
+                             desc="007" {...people}
+                             store={store}
+                             avatar='https://avatars2.githubusercontent.com/u/5145108'
+                             navigator={_navigator}/>
             );
         } else if (route.name === 'second') {
             return <ListPanel name="second" desc="007"
