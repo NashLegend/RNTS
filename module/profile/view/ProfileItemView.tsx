@@ -1,8 +1,8 @@
 /**
  * Created by Zhihu on 2017/2/8.
  */
-import * as React from 'react'
-import {View, Image, Text, ImageURISource} from 'react-native'
+import * as React from "react";
+import {View, Image, Text, ImageURISource} from "react-native";
 import Component = React.Component;
 
 interface Props {

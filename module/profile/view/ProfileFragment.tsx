@@ -1,8 +1,7 @@
 /**
  * Created by Zhihu on 2017/2/8.
  */
-
-import * as React from 'react';
+import * as React from "react";
 import {
     ListView,
     StyleSheet,
@@ -10,10 +9,10 @@ import {
     View,
     BackAndroid,
     ListViewDataSource
-} from 'react-native';
-import Component = React.Component;
+} from "react-native";
 import BaseData from "../model/BaseData";
 import createView from "../Factory";
+import Component = React.Component;
 
 let _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -40,7 +39,8 @@ export default class Profile extends Component<any,any> {
 
     render() {
         return (
-            <View style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column'}}>
+            <View
+                style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column'}}>
                 <ListView style={{alignSelf:'stretch'}}
                           renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
                           initialListSize={1}

@@ -1,14 +1,15 @@
-import * as React from 'react'
-import {View, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
+import * as React from "react";
+import {View, StyleSheet, Text, Image, TouchableHighlight} from "react-native";
+import People from "../model/People";
+import ProfileItemView from "./ProfileItemView";
 import Component = React.Component;
-import People from '../model/People'
-import ProfileItemView from './ProfileItemView'
 
 export default class ProfileView extends Component<People,any> {
     render(): JSX.Element {
         return (
             <View style={{flexDirection:'column',padding:12}}>
-                <View style={{height:200,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
+                <View
+                    style={{height:200,flexDirection:'column',justifyContent:'flex-end',alignItems:'center'}}>
                     <Image style={{width:100,height:100}} source={{uri:this.props.avatar_url}}/>
                     <Text style={{marginTop:12}}>{this.props.headline}</Text>
                 </View>
@@ -27,24 +28,31 @@ export default class ProfileView extends Component<People,any> {
                     </View>
                 </View>
                 <View style={{flexDirection:'row',marginTop:12,marginBottom:12}}>
-                    <Image style={{width:24,height:24}} source={require('../../../assets/img/ic_forum_grey_24dp.png')}/>
+                    <Image style={{width:24,height:24}}
+                           source={require('../../../assets/img/ic_forum_grey_24dp.png')}/>
                     <Text>{' ' + this.props.voteup_count}</Text>
-                    <Image style={{marginLeft:24}} source={require('../../../assets/img/ic_forum_grey_24dp.png')}/>
+                    <Image style={{marginLeft:24}}
+                           source={require('../../../assets/img/ic_forum_grey_24dp.png')}/>
                     <Text>{' ' + this.props.thanked_count}</Text>
                     <View style={{flex:1,height:0}}/>
                     <TouchableHighlight>
                         <Text style={{opacity:1}}>关注</Text>
                     </TouchableHighlight>
                 </View>
-                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')} detail="333"
+                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')}
+                                 detail="333"
                                  title="他的live"/>
-                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')} detail="333"
+                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')}
+                                 detail="333"
                                  title="他的回答"/>
-                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')} detail="333"
+                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')}
+                                 detail="333"
                                  title="他的提问"/>
-                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')} detail="333"
+                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')}
+                                 detail="333"
                                  title="他的收藏"/>
-                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')} detail="333"
+                <ProfileItemView thumb={require('../../../assets/img/ic_forum_grey_24dp.png')}
+                                 detail="333"
                                  title="他的分享"/>
             </View>
         )

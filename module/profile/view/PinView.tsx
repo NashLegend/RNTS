@@ -1,15 +1,17 @@
 import * as React from "react";
-import Answer from "../model/Answer";
 import {View} from "react-native";
+import Pin from "../model/Pin";
 import Component = React.Component;
 import JSXElement = JSX.JSXElement;
-export default class AnswerView extends Component<Answer,any> {
+import Verbs from "../model/Verbs";
+export default class PinView extends Component<Pin,any> {
 
-    constructor(props: Answer) {
+    constructor(props: Pin) {
         super(props);
     }
 
-    render(): JSXElement {
+    render(): any {
+        console.log(Verbs)
         return (
             <View/>
         );

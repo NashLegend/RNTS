@@ -55,5 +55,5 @@ export default class Types {
     static TYPE_EVENT = "eventcard";
 
     static TYPE_EXTERNALAD = "externalad";
-    
+
 }
