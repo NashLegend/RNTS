@@ -7,6 +7,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var React = require("react");
 var react_native_1 = require("react-native");
 var ProfileItemView_1 = require("./ProfileItemView");
+var NumberUtils_1 = require("../../../NumberUtils");
 var Component = React.Component;
 var ProfileView = (function (_super) {
     __extends(ProfileView, _super);
@@ -39,9 +40,9 @@ var ProfileView = (function (_super) {
                     </react_native_1.View>
                     <react_native_1.View style={{ flexDirection: 'row', marginRight: 16, marginBottom: 16, marginLeft: 16 }}>
                         <react_native_1.Image style={{ width: 24, height: 24, tintColor: '#B9B9B9' }} source={require('../../../assets/img/ic_action_thumb_up@2x.png')}/>
-                        <react_native_1.Text style={{ color: '#0000008A', fontSize: 16, marginLeft: 16 }}>{' ' + this.props.voteup_count}</react_native_1.Text>
+                        <react_native_1.Text style={{ color: '#0000008A', fontSize: 16, marginLeft: 16 }}>{NumberUtils_1.numberToKBase(this.props.voteup_count)}</react_native_1.Text>
                         <react_native_1.Image style={{ marginLeft: 32, tintColor: '#B9B9B9' }} source={require('../../../assets/img/ic_action_favorite.png')}/>
-                        <react_native_1.Text style={{ color: '#0000008A', fontSize: 16, marginLeft: 16 }}>{' ' + this.props.thanked_count}</react_native_1.Text>
+                        <react_native_1.Text style={{ color: '#0000008A', fontSize: 16, marginLeft: 16 }}>{NumberUtils_1.numberToKBase(this.props.thanked_count)}</react_native_1.Text>
                         <react_native_1.View style={{ flex: 1, height: 0 }}/>
                         <react_native_1.TouchableHighlight>
                             <react_native_1.Text style={{ opacity: 1 }}>关注</react_native_1.Text>
@@ -50,11 +51,11 @@ var ProfileView = (function (_super) {
                 </react_native_1.View>
                 <react_native_1.View style={{ alignSelf: 'stretch', height: 8 }}/>
                 <react_native_1.View style={{ flexDirection: 'column', backgroundColor: '#ffffff', elevation: 1, marginBottom: 1 }}>
-                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_live.png')} detail={this.props.hosted_live_count + ''} title="他的live"/>
-                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_answer.png')} detail={this.props.answer_count + ''} title="他的回答"/>
-                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_question.png')} detail={this.props.question_count + ''} title="他的提问"/>
-                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_favorite.png')} detail={this.props.favorite_count + ''} title="他的收藏"/>
-                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_fab_idea.png')} detail={this.props.pins_count + ''} hideDivider={true} title="他的分享"/>
+                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_live.png')} detail={this.props.hosted_live_count} title="他的live"/>
+                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_answer.png')} detail={this.props.answer_count} title="他的回答"/>
+                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_question.png')} detail={this.props.question_count} title="他的提问"/>
+                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_profile_favorite.png')} detail={this.props.favorite_count} title="他的收藏"/>
+                    <ProfileItemView_1.default thumb={require('../../../assets/img/ic_fab_idea.png')} detail={this.props.pins_count} hideDivider={true} title="他的分享"/>
                 </react_native_1.View>
             </react_native_1.View>);
     };

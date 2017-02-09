@@ -16,7 +16,7 @@ var SectionTitleView = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     SectionTitleView.prototype.render = function () {
-        return (<react_native_1.Text style={{ fontSize: 12, fontWeight: 'bold', color: '#000000DE', alignSelf: 'stretch', height: 36 }}>最新动态</react_native_1.Text>);
+        return (<react_native_1.Text style={{ fontSize: 12, fontWeight: 'bold', color: '#0000008A', alignSelf: 'stretch', paddingLeft: 16, paddingTop: 16, paddingBottom: 8 }}>最新动态</react_native_1.Text>);
     };
     return SectionTitleView;
 }(Component));

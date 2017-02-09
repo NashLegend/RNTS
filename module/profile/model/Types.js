@@ -2,8 +2,11 @@
 /**
  * Created by Zhihu on 2017/2/8.
  */
-class Types {
-}
+var Types = (function () {
+    function Types() {
+    }
+    return Types;
+}());
 Types.TYPE_SECTION_HEAD = "section_head";
 Types.TYPE_EMPTY = "empty";
 Types.TYPE_FEED = "feed";

@@ -7,8 +7,8 @@ import {
     StyleSheet,
     RecyclerViewBackedScrollView,
     DataSourceAssetCallback,
+    RefreshControl,
     View,
-    BackAndroid,
     ListViewDataSource
 } from "react-native";
 import BaseData from "../model/BaseData";
@@ -18,15 +18,6 @@ import People from "../model/People";
 import SectionHead from "../model/SectionHead";
 import Empty from "../model/Empty";
 import Component = React.Component;
-
-let _navigator;
-BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
 
 export default class ProfileFragment extends Component<any,any> implements DataSourceAssetCallback {
     source: ListViewDataSource;
@@ -51,7 +42,7 @@ export default class ProfileFragment extends Component<any,any> implements DataS
             all.push(people);
             let feeds: Array<BaseData> = JSON.parse(activities).data;
             if (feeds.length > 0) {
-                all.push(new SectionHead())
+                all.push(new SectionHead());
                 all = all.concat(feeds);
             } else {
                 all.push(new Empty())
@@ -70,21 +61,36 @@ export default class ProfileFragment extends Component<any,any> implements DataS
         super(props);
         this.source = new ListView.DataSource(this);
         this.state = {
-            dataSource: this.source
+            refreshing: false,
+            dataSource: this.source.cloneWithRows(this.source)
         }
+    }
+
+    onRefresh() {
+        this.setState({
+            ...this.state,
+            refreshing: true,
+        });
     }
 
     render() {
         return (
-            <View
-                style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column',backgroundColor:'#F2F4F7'}}>
-                <ListView style={{alignSelf:'stretch'}}
-                          renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
-                          initialListSize={1}
-                          renderSeparator={(sectionID, rowID)=><View key={`${sectionID}-${rowID}`} style={{backgroundColor:'#dbdbdb',height:0.5}}/>}
-                          dataSource={this.state.dataSource}
-                          renderRow={this.renderRow.bind(this)}/>
-            </View>
+            <ListView style={{flex:1}}
+                      renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} refreshControl={
+                              <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this.onRefresh.bind(this)}
+                                tintColor="#ff0000"
+                                title="Loading..."
+                                titleColor="#00ff00"
+                                colors={['#ff0000', '#00ff00', '#0000ff']}
+                                progressBackgroundColor="#ffff00"
+                              />
+                            }/>}
+                      initialListSize={1}
+                      renderSeparator={(sectionID, rowID)=><View key={`${sectionID}-${rowID}`} style={{backgroundColor:'#dbdbdb',height:0.5}}/>}
+                      dataSource={this.state.dataSource}
+                      renderRow={this.renderRow.bind(this)}/>
         );
     }
 }

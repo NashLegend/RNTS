@@ -17,14 +17,6 @@ const Mocks_1 = require("../Mocks");
 const SectionHead_1 = require("../model/SectionHead");
 const Empty_1 = require("../model/Empty");
 var Component = React.Component;
-let _navigator;
-react_native_1.BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
 class ProfileFragment extends Component {
     renderRow(rowData) {
         return Factory_1.default(rowData);
@@ -63,12 +55,15 @@ class ProfileFragment extends Component {
         super(props);
         this.source = new react_native_1.ListView.DataSource(this);
         this.state = {
-            dataSource: this.source
+            refreshing: false,
+            dataSource: this.source.cloneWithRows(this.source)
         };
     }
+    onRefresh() {
+        this.setState(__assign({}, this.state, { refreshing: true }));
+    }
     render() {
-        return (React.createElement(react_native_1.View, { style: { flex: 1, justifyContent: 'center', alignItems: 'stretch', flexDirection: 'column', backgroundColor: '#F2F4F7' } },
-            React.createElement(react_native_1.ListView, { style: { alignSelf: 'stretch' }, renderScrollComponent: () => React.createElement(react_native_1.RecyclerViewBackedScrollView, __assign({}, this.props)), initialListSize: 1, renderSeparator: (sectionID, rowID) => React.createElement(react_native_1.View, { key: `${sectionID}-${rowID}`, style: { backgroundColor: '#dbdbdb', height: 0.5 } }), dataSource: this.state.dataSource, renderRow: this.renderRow.bind(this) })));
+        return (React.createElement(react_native_1.ListView, { style: { flex: 1 }, renderScrollComponent: () => React.createElement(react_native_1.RecyclerViewBackedScrollView, __assign({}, this.props, { refreshControl: React.createElement(react_native_1.RefreshControl, { refreshing: this.state.refreshing, onRefresh: this.onRefresh.bind(this), tintColor: "#ff0000", title: "Loading...", titleColor: "#00ff00", colors: ['#ff0000', '#00ff00', '#0000ff'], progressBackgroundColor: "#ffff00" }) })), initialListSize: 1, renderSeparator: (sectionID, rowID) => React.createElement(react_native_1.View, { key: `${sectionID}-${rowID}`, style: { backgroundColor: '#dbdbdb', height: 0.5 } }), dataSource: this.state.dataSource, renderRow: this.renderRow.bind(this) }));
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
