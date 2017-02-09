@@ -2,15 +2,16 @@
  * Created by Zhihu on 2017/2/4.
  */
 
-import React, {Component} from 'react';
+import * as React from 'react';
 import {AppRegistry, StyleSheet, Navigator, View, BackAndroid} from 'react-native';
 import Profile from './containers/Profile'
 import ListPanel from './ListPanel'
-import ScrollPanel from './ScrollPanel'
+let ScrollPanel = require('./ScrollPanel');
 import {Provider} from 'react-redux'
 import configureStore from './store/users'
 import ProfileFragment from './module/profile/view/ProfileFragment'
 import People from './module/profile/model/People'
+import Component = React.Component;
 
 let store = configureStore();
 
@@ -25,13 +26,13 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
 
 let people;
 
-export default class RNTS extends Component {
+export default class RNTS extends Component<any,any> {
 
     constructor() {
         super();
         this.state = {
             isLoading: true,
-            store: configureStore(() => this.setState({isLoading: false}))
+            store: configureStore()
         };
         people = new People();
         people.following_topic_count = 1;
@@ -40,7 +41,7 @@ export default class RNTS extends Component {
         people.voteup_count = 1;
         people.thanked_count = 1;
         people.avatar_url = 'https://avatars1.githubusercontent.com/u/5809592';
-        people.headline = '我本将心向明月，奈何明月照沟渠';
+        people.headline = '我本将心向明月，奈何明月照沟渠~';
     }
 
     routeMapper(route, navigationOperations, onComponentRef) {
@@ -54,9 +55,7 @@ export default class RNTS extends Component {
                                  navigator={_navigator}/>
             );
         } else if (route.name === 'second') {
-            return <ListPanel name="second" desc="007"
-                              avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809523'}}
-                              navigator={_navigator}/>
+            return <ListPanel navigator={_navigator}/>
         } else if (route.name === 'third') {
             return <ScrollPanel name="second" desc="007"
                                 avatar={{uri: 'https://avatars1.githubusercontent.com/u/5809523'}}
@@ -67,8 +66,8 @@ export default class RNTS extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Navigator style={styles.container} initialRoute={{name: 'first', title: 'First', index: 0}}
-                           renderScene={this.routeMapper}/>
+                <Navigator initialRoute={{name: 'first', title: 'First', index: 0}}
+                           renderScene={this.routeMapper.bind(this)}/>
             </Provider>
         );
     }

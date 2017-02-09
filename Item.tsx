@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 
 interface Props {
-    icon: string
-    name: string
-    desc: string
-    navigator: Navigator
+    icon?: string
+    name?: string
+    desc?: string
+    navigator?: Navigator
 }
 
 interface State {

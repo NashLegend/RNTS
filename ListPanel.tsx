@@ -14,9 +14,6 @@ import Item from './Item'
 import ReactElement = React.ReactElement;
 
 interface Props {
-    icon: string
-    name: string
-    desc: string
     navigator: Navigator
 }
 
@@ -31,7 +28,7 @@ export default class ListPanel extends React.Component<Props,State> implements D
     constructor(props: Props) {
         super(props);
         this.source = new ListView.DataSource(this);
-        var ss: Array<any> = [];
+        let ss: Array<any> = [];
         for (let i = 0; i < 3; i++) {
             ss.push({title: 'what you see before request done' + i});
         }
@@ -53,7 +50,7 @@ export default class ListPanel extends React.Component<Props,State> implements D
             let response: Response = await fetch('http://facebook.github.io/react-native/movies.json');
             let responseJson: any = await response.json();
             let arr: Array<any> = responseJson.movies;
-            arr = arr.concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr);
+            arr = arr.concat(arr).concat(arr).concat(arr).concat(arr).concat(arr).concat(arr);
             this.setState({
                 dataSource: this.source.cloneWithRows(arr)
             })
@@ -70,10 +67,9 @@ export default class ListPanel extends React.Component<Props,State> implements D
     }
 
     render(): JSX.Element {
-        //在Android上加上下面这行会使用原生的RecyclerViewBackedScrollView，复用View，如果不加的话，只会使用ScrollView
-        //renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
         return (
-            <View style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column'}}>
+            <View
+                style={{flex:1, justifyContent:'center', alignItems: 'stretch', flexDirection:'column'}}>
                 <ListView style={{alignSelf:'stretch'}}
                           renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} />}
                           initialListSize={1}
