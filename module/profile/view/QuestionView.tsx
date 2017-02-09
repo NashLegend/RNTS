@@ -5,7 +5,7 @@ import * as React from "react";
 import Answer from "../model/Answer";
 import {View} from "react-native";
 import Component = React.Component;
-import JSXElement = JSX.JSXElement;
+import JSXElement = JSX.Element;
 import Question from "../model/Question";
 export default class QuestionView extends Component<Question,any> {
 
