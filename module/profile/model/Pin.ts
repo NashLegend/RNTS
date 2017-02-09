@@ -5,25 +5,25 @@ import BaseData from "./BaseData";
 import People from "./People";
 
 export default class Pin extends BaseData {
-    stringupdated: number;
+    updated: number;
 
-    stringvirtuals: any;
+    virtuals: any;
 
-    stringauthor: People;
+    author: People;
 
-    stringcomment_permission: string;
+    comment_permission: string;
 
-    stringcreated: number;
+    created: number;
 
-    stringcontent: Array<any>;
+    content: Array<any>;
 
-    stringstate: string;
+    state: string;
 
-    stringcomment_count: number;
+    comment_count: number;
 
-    stringlike_count: number;
+    like_count: number;
 
-    stringexcerpt_title: string;
+    excerpt_title: string;
 
-    stringid: string;
+    id: string;
 }

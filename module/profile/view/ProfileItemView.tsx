@@ -3,24 +3,29 @@
  */
 import * as React from "react";
 import {View, Image, Text, ImageURISource} from "react-native";
+
 import Component = React.Component;
 
 interface Props {
     thumb: ImageURISource,
     title: string,
-    detail: string
+    detail: number,
+    hideDivider?: boolean
 }
 
 export default class ProfileItemView extends Component<Props,any> {
     render(): JSX.Element {
-        console.log(this.props.thumb);
         return (
-            <View style={{flexDirection:'row',height:48,alignItems:'center'}}>
-                <Image style={{width:24,height:24}} source={this.props.thumb}/>
-                <Text style={{flex:1,marginLeft:12}}>{this.props.title}</Text>
-                <Text>{this.props.detail}</Text>
+            <View style={{flexDirection:'column',height:48.5,alignItems:'stretch'}}>
+                <View
+                    style={{flexDirection:'row',height:48,alignItems:'center',paddingBottom:16,paddingTop:16,paddingLeft:16,paddingRight:16}}>
+                    <Image style={{width:24,height:24,tintColor:'#B9B9B9'}} source={this.props.thumb}/>
+                    <Text style={{flex:1,color:'#0000008A',fontSize:16,marginLeft:16}}>{this.props.title}</Text>
+                    <Text
+                        style={{marginLeft:12,color:'#0000008A',fontSize:16}}>{this.props.detail}</Text>
+                </View>
+                <View style={{backgroundColor:'#E6E6E6',height:this.props.hideDivider?0:0.5,marginLeft:56}}/>
             </View>
         );
     }
 }
-

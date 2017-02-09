@@ -9,7 +9,7 @@ import ListPanel from './ListPanel'
 import ScrollPanel from './ScrollPanel'
 import {Provider} from 'react-redux'
 import configureStore from './store/users'
-import ProfileView from './module/profile/view/ProfileView'
+import ProfileFragment from './module/profile/view/ProfileFragment'
 import People from './module/profile/model/People'
 
 let store = configureStore();
@@ -47,11 +47,11 @@ export default class RNTS extends Component {
         _navigator = navigationOperations;
         if (route.name === 'first') {
             return (
-                <ProfileView name="NoFace"
-                             desc="007" {...people}
-                             store={store}
-                             avatar='https://avatars2.githubusercontent.com/u/5145108'
-                             navigator={_navigator}/>
+                <ProfileFragment name="NoFace"
+                                 desc="007" {...people}
+                                 store={store}
+                                 avatar='https://avatars2.githubusercontent.com/u/5145108'
+                                 navigator={_navigator}/>
             );
         } else if (route.name === 'second') {
             return <ListPanel name="second" desc="007"

@@ -3,29 +3,29 @@ import People from "./People";
 /**
  * Created by Pan on 2017/2/8.
  */
-export default class Feed {
+export default class Feed extends BaseData{
 
-    numberid: string;
+    id: string;
 
-    numberverb: string;
+    verb: string;
 
-    numbertarget: BaseData;
+    target: BaseData;
 
-    numberactors: Array<BaseData>;
+    actors: Array<BaseData>;
 
-    numberactor: People;
+    actor: People;
 
-    numbercount: number;
+    count: number;
 
-    numbercreated_time: number;
+    created_time: number;
 
-    numberupdated_time: number;
+    updated_time: number;
 
-    numbercard: any;
+    card: any;
 
-    numberad: any;
+    ad: any;
 
-    numberaction_text: string;
+    action_text: string;
 
-    numberattached_info: string;
+    attached_info: string;
 }

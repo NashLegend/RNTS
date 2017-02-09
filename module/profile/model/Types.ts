@@ -2,6 +2,8 @@
  * Created by Zhihu on 2017/2/8.
  */
 export default class Types {
+    static TYPE_SECTION_HEAD = "section_head";
+    static TYPE_EMPTY = "empty";
     static TYPE_FEED = "feed";
 
     static TYPE_QUESTION = "question";
