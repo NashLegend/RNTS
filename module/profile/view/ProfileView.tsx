@@ -1,11 +1,16 @@
 import * as React from "react";
-import {View, Text, Image, TouchableHighlight} from "react-native";
+import {View, Text, Image, TouchableNativeFeedback} from "react-native";
 import People from "../model/People";
 import ProfileItemView from "./ProfileItemView";
 import {numberToKBase} from "../../../NumberUtils";
 import Component = React.Component;
 
 export default class ProfileView extends Component<People,any> {
+
+    toggleFollow() {
+
+    }
+
     render(): JSX.Element {
         return (
             <View style={{flexDirection:'column',backgroundColor:'#F2F4F7'}}>
@@ -36,7 +41,8 @@ export default class ProfileView extends Component<People,any> {
                                 style={{color:'#000000DE',fontSize:24,fontWeight:'100'}}>{this.props.follower_count}</Text>
                         </View>
                     </View>
-                    <View style={{flexDirection:'row',marginRight:16,marginBottom:16,marginLeft:16}}>
+                    <View
+                        style={{flexDirection:'row',marginRight:16,marginBottom:16,marginLeft:16,alignItems:'center'}}>
                         <Image style={{width:24,height:24,tintColor:'#B9B9B9'}}
                                source={require('../../../assets/img/ic_action_thumb_up.png')}/>
                         <Text
@@ -46,9 +52,15 @@ export default class ProfileView extends Component<People,any> {
                         <Text
                             style={{color:'#0000008A',fontSize:16,marginLeft:16}}>{numberToKBase(this.props.thanked_count)}</Text>
                         <View style={{flex:1,height:0}}/>
-                        <TouchableHighlight>
-                            <Text style={{opacity:1}}>关注</Text>
-                        </TouchableHighlight>
+                        <TouchableNativeFeedback
+                            background={TouchableNativeFeedback.SelectableBackground()}
+                            onPress={this.toggleFollow.bind(this)}>
+                            <View
+                                style={{width: 96, height: 32,backgroundColor:'#d9d9d988',borderRadius:2}}>
+                                <Text
+                                    style={{flex:1,textAlign:'center',textAlignVertical:'center'}}>关注</Text>
+                            </View>
+                        </TouchableNativeFeedback>
                     </View>
                 </View>
                 <View style={{alignSelf:'stretch',height:8}}/>
