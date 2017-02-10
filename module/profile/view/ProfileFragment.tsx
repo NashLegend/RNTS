@@ -4,7 +4,6 @@
 import * as React from "react";
 import {
     ListView,
-    StyleSheet,
     RecyclerViewBackedScrollView,
     DataSourceAssetCallback,
     RefreshControl,
@@ -21,6 +20,7 @@ import Component = React.Component;
 
 export default class ProfileFragment extends Component<any,any> implements DataSourceAssetCallback {
     source: ListViewDataSource;
+    rawData: Array<BaseData> = [];
 
     renderRow(rowData: BaseData) {
         return createView(rowData)
@@ -35,23 +35,24 @@ export default class ProfileFragment extends Component<any,any> implements DataS
     }
 
     request() {
-        console.log("request");
         try {
-            let all: Array<BaseData> = [];
+            this.rawData = [];
             let people: People = JSON.parse(profile);
-            all.push(people);
+            this.rawData.push(people);
             let feeds: Array<BaseData> = JSON.parse(activities).data;
             if (feeds.length > 0) {
-                all.push(new SectionHead());
-                all = all.concat(feeds);
+                this.rawData.push(new SectionHead());
+                this.rawData = this.rawData.concat(feeds);
             } else {
-                all.push(new Empty())
+                this.rawData.push(new Empty())
             }
             this.setState({
-                dataSource: this.source.cloneWithRows(all)
+                refreshing: false,
+                dataSource: this.source.cloneWithRows(this.rawData)
             })
         } catch (err) {
             this.setState({
+                refreshing: false,
                 dataSource: this.source.cloneWithRows([{title: 'error'}])
             })
         }
@@ -71,22 +72,24 @@ export default class ProfileFragment extends Component<any,any> implements DataS
             ...this.state,
             refreshing: true,
         });
+        setTimeout(this.request.bind(this), 1000);
     }
 
     render() {
         return (
             <ListView style={{flex:1}}
-                      renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props} refreshControl={
-                              <RefreshControl
-                                refreshing={this.state.refreshing}
-                                onRefresh={this.onRefresh.bind(this)}
-                                tintColor="#ff0000"
-                                title="Loading..."
-                                titleColor="#00ff00"
-                                colors={['#ff0000', '#00ff00', '#0000ff']}
-                                progressBackgroundColor="#ffff00"
-                              />
-                            }/>}
+                      renderScrollComponent={()=><RecyclerViewBackedScrollView {...this.props}
+                          refreshControl={
+                                  <RefreshControl
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={this.onRefresh.bind(this)}
+                                    tintColor="#ff0000"
+                                    title="Loading..."
+                                    titleColor="#00ff00"
+                                    colors={['#1E8AE8']}
+                                    progressBackgroundColor="#ffffff"
+                                  />
+                                }/>}
                       initialListSize={1}
                       renderSeparator={(sectionID, rowID)=><View key={`${sectionID}-${rowID}`} style={{backgroundColor:'#dbdbdb',height:0.5}}/>}
                       dataSource={this.state.dataSource}
@@ -94,19 +97,3 @@ export default class ProfileFragment extends Component<any,any> implements DataS
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5
-    }
-});

@@ -5,8 +5,7 @@
     "noImplicitAny": false,
     "sourceMap": false,
     "jsx": "react",
-    "allowJs": true,
-    "outDir": "./js/gen"
+    "allowJs": true
   },
   "include": [
     "./**/*"

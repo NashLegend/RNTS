@@ -11,13 +11,13 @@ export default class ProfileView extends Component<People,any> {
             <View style={{flexDirection:'column',backgroundColor:'#F2F4F7'}}>
                 <View style={{flexDirection:'column',backgroundColor:'#ffffff',elevation:1}}>
                     <View
-                        style={{height:200,flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:16}}>
+                        style={{height:200,flexDirection:'column',justifyContent:'flex-end',alignItems:'center',paddingBottom:16,backgroundColor:'#1E8AE8'}}>
                         <View>
                             <Image style={{width:72,height:72,borderRadius:36}} source={{uri:this.props.avatar_url}}/>
                             <Image style={{width:24,height:24,borderRadius:36,marginTop:-24,alignSelf:'flex-end'}}
-                                   source={{uri:this.props.avatar_url}}/>
+                                   source={this.props.gender==1?require("../../../assets/img/ic_profile_male.png"):require("../../../assets/img/ic_profile_female.png")}/>
                         </View>
-                        <Text style={{color:'#0000008A',marginTop:16,fontSize:14}}>{this.props.headline}</Text>
+                        <Text style={{color:'#ffffff',marginTop:16,fontSize:14}}>{this.props.headline}</Text>
                     </View>
                     <View style={{flexDirection:'row',margin:16}}>
                         <View style={{flexDirection:'column',alignItems:'stretch',flex:1}}>
@@ -38,7 +38,7 @@ export default class ProfileView extends Component<People,any> {
                     </View>
                     <View style={{flexDirection:'row',marginRight:16,marginBottom:16,marginLeft:16}}>
                         <Image style={{width:24,height:24,tintColor:'#B9B9B9'}}
-                               source={require('../../../assets/img/ic_action_thumb_up@2x.png')}/>
+                               source={require('../../../assets/img/ic_action_thumb_up.png')}/>
                         <Text
                             style={{color:'#0000008A',fontSize:16,marginLeft:16}}>{numberToKBase(this.props.voteup_count)}</Text>
                         <Image style={{marginLeft:32,tintColor:'#B9B9B9'}}

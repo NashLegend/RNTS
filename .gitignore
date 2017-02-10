@@ -4,8 +4,6 @@
 
 # Xcode
 #
-build/
-js/gen/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -31,6 +29,11 @@ captures/
 .gradle
 local.properties
 *.iml
+*.js
+!index.android.js
+!index.ios.js
+#
+!js/**/*.js
 
 # node.js
 #
