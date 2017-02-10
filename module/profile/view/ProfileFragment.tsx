@@ -34,6 +34,31 @@ export default class ProfileFragment extends Component<any,any> implements DataS
         this.request()
     }
 
+    async fetchProfile(init: boolean, afterId?: string) {
+        let requestInfo: RequestInfo;
+        let url = "https://api.zhihu.com/people/f9de84865e3e8455a09af78bfe4d1da5/activities?action_feed=true";
+        if (init) {
+            requestInfo = new Request(`${url}&limit=3`);
+        } else {
+            requestInfo = new Request(`${url}&after_id=${afterId}&limit=20`);
+        }
+        requestInfo.headers.append("x-uuid","AJBC4YMkJwtLBWToB5tgz_P39GBmYBL6Xr0=");
+        let response: Response = await fetch(requestInfo);
+        let responseJson: any = await response.json();
+        let feeds: Array<BaseData> = responseJson.data;
+        if (init) {
+            this.rawData = [];
+        }
+        if (feeds.length > 0) {
+            if (init) {
+                this.rawData.push(new SectionHead());
+            }
+            this.rawData = this.rawData.concat(feeds);
+        } else {
+            this.rawData.push(new Empty())
+        }
+    }
+
     request() {
         try {
             this.rawData = [];
